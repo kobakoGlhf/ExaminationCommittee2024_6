@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class InGameManager : MonoBehaviour
 {
+    [SerializeField]PlayerHP _player=default;
+
     [SerializeField] public int _score = 0;
     [SerializeField] Text _scoreText;
     [SerializeField] BoxCollider2D _spawnArea;
@@ -26,6 +28,8 @@ public class InGameManager : MonoBehaviour
             _scoreSub = _score;
         }
         _scoreText.text = _score.ToString();
+
+        if (_player != null && _player._hitPoint == 0) GameOver();
     }
     void CreatorArea()
     {
@@ -33,4 +37,9 @@ public class InGameManager : MonoBehaviour
         float randomY = Random.Range(-_spawnArea.size.y, _spawnArea.size.y) * .5f;
         Instantiate(_spawnObject, new Vector2(randomX + _spawnArea.gameObject.transform.position.x, randomY + _spawnArea.gameObject.transform.position.y), Quaternion.identity).tag="Target";
     }
+    void GameOver()
+    {
+        Debug.Log("gammeover");
+    }
+
 }

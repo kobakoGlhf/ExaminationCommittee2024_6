@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Skill1 : MonoBehaviour
 {
-    [SerializeField] float _lifeTime=2;
+    //[SerializeField] float _lifeTime=2;
     [SerializeField] float _speed=5;
     [SerializeField] string _hitObjectTagName="Player";
     InGameManager _gameManager;
@@ -23,7 +23,7 @@ public class Skill1 : MonoBehaviour
     {
         
         _rb.velocity = this.transform.up * -_speed;
-        Destroy(gameObject, _lifeTime);
+        //Destroy(gameObject, _lifeTime);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
