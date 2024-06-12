@@ -88,9 +88,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1622627561560380510}
   - component: {fileID: 47753071534167829}
+  - component: {fileID: 6825860662847622387}
   - component: {fileID: 5968648200565012874}
   m_Layer: 0
-  m_Name: Circle (3)
+  m_Name: GardSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,6 +164,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6825860662847622387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2749150495517426344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de473c8643ecca04d8795e2490389764, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!58 &5968648200565012874
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -209,7 +222,7 @@ GameObject:
   - component: {fileID: 2136082244765318972}
   - component: {fileID: 3652244164543997467}
   m_Layer: 0
-  m_Name: Skill
+  m_Name: SkillShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -245,6 +258,9 @@ MonoBehaviour:
   _objectQ: {fileID: 195340906934527091, guid: 55efbe0ba2d040e4e9e0727c37b780c7, type: 3}
   _player: {fileID: 1449657696281088903}
   _skillCoolTime: 0
+  _guardSkill: {fileID: 2749150495517426344}
+  _guard: {fileID: 0}
+  _gardSkillTime: 2
 --- !u!1 &8024349926543119503
 GameObject:
   m_ObjectHideFlags: 0
