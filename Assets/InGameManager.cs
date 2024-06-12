@@ -11,6 +11,9 @@ public class InGameManager : MonoBehaviour
     [SerializeField] Text _scoreText;
     [SerializeField] BoxCollider2D _spawnArea;
     [SerializeField] GameObject _spawnObject;
+    [SerializeField] string _startSceneName;
+    [SerializeField] string _thisSceneName;
+
     int _scoreSub = 0;
 
     // Start is called before the first frame update
@@ -29,7 +32,7 @@ public class InGameManager : MonoBehaviour
         }
         _scoreText.text = _score.ToString();
 
-        if (_player != null && _player._hitPoint == 0) GameOver();
+        if (_player != null && _player._hitPoint <= 0) GameOver();
     }
     void CreatorArea()
     {

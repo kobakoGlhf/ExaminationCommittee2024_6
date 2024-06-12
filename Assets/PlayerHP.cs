@@ -6,10 +6,11 @@ public class PlayerHP : MonoBehaviour
 {
     [SerializeField]public int _hitPoint=10;
     [SerializeField] int _maxHP;
+    [SerializeField] GameObject _destroyObj;
     public int _hitDamage=1;
     private void Update()
     {
-        if(_hitPoint<=0)Destroy(gameObject);
+        if(_hitPoint<=0)Destroy(_destroyObj);
     }
     public void HealHP(int heal)
     {

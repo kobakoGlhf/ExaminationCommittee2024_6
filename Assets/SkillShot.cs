@@ -7,6 +7,11 @@ public class SkillShot : MonoBehaviour
     [SerializeField] GameObject _objectQ;
     [SerializeField] Transform _player;
     [SerializeField] float _skillCoolTime;
+    [SerializeField] GameObject _guardSkill;
+    [SerializeField] GameObject _guard;
+    [SerializeField] float _gardSkillTime=2f;
+    int _skillPoint = 10;
+    InGameManager _inGameManager;
     
     float _mousePosX;
     float _mousePosY;
@@ -14,7 +19,8 @@ public class SkillShot : MonoBehaviour
     void Start()
     {
         //_skill1 =KeyCode.Q;
-        
+        _guardSkill.SetActive(false);
+        _inGameManager = GameObject.Find("InGameManager").GetComponent<InGameManager>();
     }
 
     // Update is called once per frame
@@ -25,10 +31,24 @@ public class SkillShot : MonoBehaviour
         {
             SkillShot1();
         }
+        if (_inGameManager._score >= _skillPoint)
+        {
+            GuardSkillOn();
+            Invoke("GuardSkillOff",_gardSkillTime);
+            _skillPoint +=_skillPoint;
+        }
     }
     void SkillShot1()
     {
         Instantiate(_objectQ, _player.position, this.transform.rotation);
+    }
+    void GuardSkillOn()
+    {
+        _guardSkill.SetActive(true);
+    }
+    void GuardSkillOff()
+    {
+        _guardSkill.SetActive(false);
     }
     void Crosshair()
     {

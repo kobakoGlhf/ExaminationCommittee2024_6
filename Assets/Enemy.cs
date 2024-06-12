@@ -8,19 +8,30 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] int _bulletCreatAmount;
     [SerializeField] GameObject _bullet;
+    InGameManager _inGameManager;
+    private void Start()
+    {
+        _inGameManager = GameObject.Find("InGameManager").GetComponent<InGameManager>();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag!="Player"&&collision.tag!="EnemyBullet")
-        for (float i = 0; i < 360; i++)
+        if (collision.tag =="PlayerBullet")
         {
-            if(i %_bulletCreatAmount == 0)
+            for (float i = 0; i < 360; i++)
             {
-                Vector3 pos=transform.localEulerAngles;
-                pos.z = i;
-                var obj= Instantiate(_bullet, new Vector2(transform.position.x, transform.position.y),Quaternion.identity);
-                obj.transform.localEulerAngles=pos;
+                if (i % _bulletCreatAmount == 0)
+                {
+                    Vector3 pos = transform.localEulerAngles;
+                    pos.z = i;
+                    var obj = Instantiate(_bullet, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+                    obj.transform.localEulerAngles = pos;
+                }
             }
         }
+    }
+    private void OnDestroy()
+    {
+        _inGameManager._score += 1;
     }
     //OnDestroyでInstantiateするとバグる(おそらく終了時にデストロイされるため)
 }
