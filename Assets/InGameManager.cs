@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,8 +12,7 @@ public class InGameManager : MonoBehaviour
     [SerializeField] Text _scoreText;
     [SerializeField] BoxCollider2D _spawnArea;
     [SerializeField] GameObject _spawnObject;
-    [SerializeField] string _startSceneName;
-    [SerializeField] string _thisSceneName;
+    [SerializeField]GameObject _gameOvarUI;
 
     int _scoreSub = 0;
 
@@ -42,7 +42,7 @@ public class InGameManager : MonoBehaviour
     }
     void GameOver()
     {
-        Debug.Log("gammeover");
+        _gameOvarUI.SetActive(true);
     }
 
 }

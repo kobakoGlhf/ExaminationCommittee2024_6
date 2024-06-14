@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class GardSkill : MonoBehaviour
 {
+    [SerializeField] SkillShot _skillShot;
+    private void Start()
+    {
+        _skillShot.gameObject.GetComponent<SkillShot>();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "EnemyBullet")

@@ -33,5 +33,5 @@ public class Enemy : MonoBehaviour
     {
         _inGameManager._score += 1;
     }
-    //OnDestroyでInstantiateするとバグる(おそらく終了時にデストロイされるため)
+    //OnDestroyでInstantiateするとバグる(おそらく終了時にデストロイされるため判定が残る)
 }

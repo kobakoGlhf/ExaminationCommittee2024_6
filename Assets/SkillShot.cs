@@ -8,13 +8,14 @@ public class SkillShot : MonoBehaviour
     [SerializeField] Transform _player;
     [SerializeField] float _skillCoolTime;
     [SerializeField] GameObject _guardSkill;
+    public GameObject _guardSkillBool;
     [SerializeField] GameObject _guard;
     [SerializeField] float _gardSkillTime=2f;
-    int _skillPoint = 10;
+    int _skillPoint = 1;
     InGameManager _inGameManager;
     
-    float _mousePosX;
-    float _mousePosY;
+    public float _mousePosX;
+    public float _mousePosY;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +34,7 @@ public class SkillShot : MonoBehaviour
         }
         if (_inGameManager._score >= _skillPoint)
         {
-            GuardSkillOn();
+            _guardSkill.SetActive(true);
             Invoke("GuardSkillOff",_gardSkillTime);
             _skillPoint +=_skillPoint;
         }
@@ -41,10 +42,6 @@ public class SkillShot : MonoBehaviour
     void SkillShot1()
     {
         Instantiate(_objectQ, _player.position, this.transform.rotation);
-    }
-    void GuardSkillOn()
-    {
-        _guardSkill.SetActive(true);
     }
     void GuardSkillOff()
     {

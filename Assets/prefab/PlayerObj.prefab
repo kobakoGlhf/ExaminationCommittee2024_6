@@ -51,6 +51,7 @@ MonoBehaviour:
   _speed: 5
   _rb: {fileID: 3064893843535420212}
   _killSkillCoolDown: 0
+  _blink: 40
 --- !u!50 &3064893843535420212
 Rigidbody2D:
   serializedVersion: 4
@@ -88,8 +89,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1622627561560380510}
   - component: {fileID: 47753071534167829}
-  - component: {fileID: 6825860662847622387}
   - component: {fileID: 5968648200565012874}
+  - component: {fileID: 4811878877506907036}
   m_Layer: 0
   m_Name: GardSkill
   m_TagString: Untagged
@@ -164,18 +165,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6825860662847622387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2749150495517426344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de473c8643ecca04d8795e2490389764, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &5968648200565012874
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -211,6 +200,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &4811878877506907036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2749150495517426344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ca382fe94d48e4fae2e694e571bb33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillShot: {fileID: 3652244164543997467}
 --- !u!1 &5355149307713452635
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,8 +261,11 @@ MonoBehaviour:
   _player: {fileID: 1449657696281088903}
   _skillCoolTime: 0
   _guardSkill: {fileID: 2749150495517426344}
+  _guardSkillBool: {fileID: 0}
   _guard: {fileID: 0}
   _gardSkillTime: 2
+  _mousePosX: 0
+  _mousePosY: 0
 --- !u!1 &8024349926543119503
 GameObject:
   m_ObjectHideFlags: 0
