@@ -25,7 +25,6 @@ public class PlayerHP : MonoBehaviour
         if (collision.gameObject.tag == "EnemyBullet")
         {
             _hitPoint -= _hitDamage;
-            Debug.Log(_hitPoint);
         }
     }
 }

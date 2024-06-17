@@ -10,6 +10,7 @@ public class MovePlayer : MonoBehaviour
     public int _killSkillCoolDown;
     [SerializeField] float _blink=2;
     bool _cor;
+    [SerializeField]SkillShot _shot;
     //Vector3 _cameraEnd;
     //Vector3 _cameraEndMinus;
     // Start is called before the first frame update
@@ -26,12 +27,12 @@ public class MovePlayer : MonoBehaviour
     {
         float moveHorizon=Input.GetAxis("Horizontal");
         float moveVerti = Input.GetAxis("Vertical");
-        int horizon;
-        int verti=0;
-        if (moveHorizon >= 0) horizon = 1;
-        else horizon = -1;
-        if (moveVerti > 0) verti = 1;
-        else if (moveVerti< 0) verti = -1;
+        //int horizon;
+        //int verti=0;
+        //if (moveHorizon >= 0) horizon = 1;
+        //else horizon = -1;
+        //if (moveVerti > 0) verti = 1;
+        //else if (moveVerti< 0) verti = -1;
         if (_cor == false)
         {
             _rb.velocity = new Vector2(moveHorizon * _speed, moveVerti * _speed);
@@ -39,7 +40,7 @@ public class MovePlayer : MonoBehaviour
             //ƒuƒŠƒ“ƒN‚ÌŽÀ‘•
             if (Input.GetMouseButtonDown(1))//‚¢‚Â‚©GetAxis‚É•Ï‚¦‚é
             {
-                StartCoroutine(BlinkCol(horizon,verti));
+                StartCoroutine(BlinkCol(-_shot._mousePosX,-_shot._mousePosY));
             }
         }
 
@@ -60,8 +61,12 @@ public class MovePlayer : MonoBehaviour
             x *= 0.75f;
             y *= 0.75f;
         }
+        float Ax = x / y;
+        float Ay= y / x;
+        Debug.Log(-_shot._mousePosX);
+        Debug.Log(-_shot._mousePosY);
         _cor = true;
-        _rb.velocity =new Vector2(x*_blink,y*_blink);
+        _rb.velocity =new Vector2(Ax,Ay);
         yield return new WaitForSeconds(.1f);
         _cor=false;
         yield break;

@@ -8,10 +8,9 @@ public class SkillShot : MonoBehaviour
     [SerializeField] Transform _player;
     [SerializeField] float _skillCoolTime;
     [SerializeField] GameObject _guardSkill;
-    public GameObject _guardSkillBool;
-    [SerializeField] GameObject _guard;
-    [SerializeField] float _gardSkillTime=2f;
-    int _skillPoint = 1;
+    [SerializeField] float _gardSkillTime=1f;
+    [SerializeField] int _skillPoint = 1;
+    int _skillPointCount;
     InGameManager _inGameManager;
     
     public float _mousePosX;
@@ -21,6 +20,8 @@ public class SkillShot : MonoBehaviour
     {
         //_skill1 =KeyCode.Q;
         _guardSkill.SetActive(false);
+        _guardSkill.gameObject.tag = "Untagged";
+        _skillPointCount = _skillPoint;
         _inGameManager = GameObject.Find("InGameManager").GetComponent<InGameManager>();
     }
 
@@ -32,27 +33,35 @@ public class SkillShot : MonoBehaviour
         {
             SkillShot1();
         }
-        if (_inGameManager._score >= _skillPoint)
+        if (_inGameManager._score >= _skillPointCount && _guardSkill != null)
         {
-            _guardSkill.SetActive(true);
-            Invoke("GuardSkillOff",_gardSkillTime);
-            _skillPoint +=_skillPoint;
+            StartCoroutine(gardSkillCol(_gardSkillTime));
+            _skillPointCount += _skillPoint;//ƒŠƒZƒbƒg
         }
+    }
+    IEnumerator gardSkillCol(float i)
+    {
+        GardSkill attack=_guardSkill.GetComponent<GardSkill>();
+        _guardSkill.SetActive(true);
+        yield return null;
+        yield return new WaitForSeconds(i);
+        attack._attack = true;
+        yield return new WaitForSeconds(.1f);
+        attack._attack = false;
+        _guardSkill.SetActive(false);
+        yield break;
     }
     void SkillShot1()
     {
         Instantiate(_objectQ, _player.position, this.transform.rotation);
     }
-    void GuardSkillOff()
-    {
-        _guardSkill.SetActive(false);
-    }
-    void Crosshair()
+    Vector2 Crosshair()
     {
         _player = _player.transform;
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         _mousePosX = _player.position.x - mousePos.x;
         _mousePosY = _player.position.y - mousePos.y;
         transform.up = new Vector2(_mousePosX, _mousePosY);
+        return new Vector2(_mousePosX, _mousePosY);
     }
 }

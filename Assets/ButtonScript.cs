@@ -22,6 +22,11 @@ public class ButtonScript : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+    public void SceneChanges(Scene scene)
+    {
+        _sceneName = scene.name;
+        SceneManager.LoadScene(_sceneName);
+    }
     public void ActiveGameObjectTrue(GameObject obj)
     {
         obj.SetActive(true);
