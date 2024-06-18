@@ -8,7 +8,7 @@ public class MovePlayer : MonoBehaviour
     [SerializeField] float _speed=5f;
     [SerializeField]Rigidbody2D _rb;
     public int _killSkillCoolDown;
-    [SerializeField] float _blink=2;
+    [SerializeField] float _blink = 2;
     bool _cor;
     [SerializeField]SkillShot _shot;
     //Vector3 _cameraEnd;
@@ -27,12 +27,12 @@ public class MovePlayer : MonoBehaviour
     {
         float moveHorizon=Input.GetAxis("Horizontal");
         float moveVerti = Input.GetAxis("Vertical");
-        //int horizon;
-        //int verti=0;
-        //if (moveHorizon >= 0) horizon = 1;
-        //else horizon = -1;
-        //if (moveVerti > 0) verti = 1;
-        //else if (moveVerti< 0) verti = -1;
+        int horizon;
+        int verti = 0;
+        if (moveHorizon >= 0) horizon = 1;
+        else horizon = -1;
+        if (moveVerti > 0) verti = 1;
+        else if (moveVerti < 0) verti = -1;
         if (_cor == false)
         {
             _rb.velocity = new Vector2(moveHorizon * _speed, moveVerti * _speed);
@@ -40,7 +40,7 @@ public class MovePlayer : MonoBehaviour
             //ƒuƒŠƒ“ƒN‚ÌŽÀ‘•
             if (Input.GetMouseButtonDown(1))//‚¢‚Â‚©GetAxis‚É•Ï‚¦‚é
             {
-                StartCoroutine(BlinkCol(-_shot._mousePosX,-_shot._mousePosY));
+                StartCoroutine(BlinkCol(horizon,verti));
             }
         }
 
@@ -61,14 +61,27 @@ public class MovePlayer : MonoBehaviour
             x *= 0.75f;
             y *= 0.75f;
         }
+        _cor = true;
+        _rb.velocity =new Vector2(x*_blink,y*_blink);
+        yield return new WaitForSeconds(.1f);
+        _cor=false;
+        yield break;
+    }
+    IEnumerator BlinkColMouse(float x, float y)
+    {
+        if ((x == 1 || x == -1) && (y == 1 || y == -1))
+        {
+            x *= 0.75f;
+            y *= 0.75f;
+        }
         float Ax = x / y;
-        float Ay= y / x;
+        float Ay = y / x;
         Debug.Log(-_shot._mousePosX);
         Debug.Log(-_shot._mousePosY);
         _cor = true;
-        _rb.velocity =new Vector2(Ax,Ay);
+        _rb.velocity = new Vector2(Ax, Ay);
         yield return new WaitForSeconds(.1f);
-        _cor=false;
+        _cor = false;
         yield break;
     }
 }

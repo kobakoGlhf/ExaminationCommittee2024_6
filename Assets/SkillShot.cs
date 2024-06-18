@@ -33,22 +33,24 @@ public class SkillShot : MonoBehaviour
         {
             SkillShot1();
         }
-        if (_inGameManager._score >= _skillPointCount && _guardSkill != null)
+        if (_inGameManager._score >= _skillPointCount && _guardSkill != null&&Input.GetKeyDown(KeyCode.E))
         {
             StartCoroutine(gardSkillCol(_gardSkillTime));
-            _skillPointCount += _skillPoint;//ƒŠƒZƒbƒg
         }
     }
     IEnumerator gardSkillCol(float i)
     {
         GardSkill attack=_guardSkill.GetComponent<GardSkill>();
         _guardSkill.SetActive(true);
+        attack._attack = true;
         yield return null;
+        attack._attack = false;
         yield return new WaitForSeconds(i);
         attack._attack = true;
         yield return new WaitForSeconds(.1f);
         attack._attack = false;
         _guardSkill.SetActive(false);
+        _skillPointCount += _skillPoint;
         yield break;
     }
     void SkillShot1()
