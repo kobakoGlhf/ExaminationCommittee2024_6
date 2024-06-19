@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ButtonScript : MonoBehaviour
 {
     [SerializeField] string _sceneName;
     [SerializeField] GameObject[] _setFalse;
+    [SerializeField] GameObject _panel;
     private void Start()
     {
         foreach (GameObject obj in _setFalse)
         {
             obj.SetActive(false);
         }
+        ActiveGameObjectFalse(_panel);
+
     }
     public void SceneChanges()
     {
@@ -21,11 +25,17 @@ public class ButtonScript : MonoBehaviour
     public void SceneChanges(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+        Invoke("LoadSceneEfect", 1f);
+        ActiveGameObjectTrue(_panel);
+        Image panelColor=_panel.GetComponent<Image>();
+        //SpanelColor.color = new Color(255, 0, 0, 1);
     }
-    public void SceneChanges(Scene scene)
+    public IEnumerator SceneChanges(Scene scene)
     {
         _sceneName = scene.name;
         SceneManager.LoadScene(_sceneName);
+        yield return new WaitForSeconds(1) ;
+        yield break;
     }
     public void ActiveGameObjectTrue(GameObject obj)
     {
