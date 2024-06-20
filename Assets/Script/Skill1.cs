@@ -5,7 +5,7 @@ using UnityEngine;
 public class Skill1 : MonoBehaviour
 {
     //[SerializeField] float _lifeTime=2;
-    [SerializeField] float _speed = 5;
+    [SerializeField]public float _speed = 5;
     Rigidbody2D _rb;
     SkillShot _skillShot;
     [HideInInspector]

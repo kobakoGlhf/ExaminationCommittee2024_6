@@ -28,12 +28,12 @@ public class MovePlayer : MonoBehaviour
     {
         float moveHorizon=Input.GetAxis("Horizontal");
         float moveVerti = Input.GetAxis("Vertical");
-        int horizon;
-        int verti = 0;
-        if (moveHorizon >= 0) horizon = 1;
-        else horizon = -1;
-        if (moveVerti > 0) verti = 1;
-        else if (moveVerti < 0) verti = -1;
+        //int horizon;
+        //int verti = 0;
+        //if (moveHorizon >= 0) horizon = 1;
+        //else horizon = -1;
+        //if (moveVerti > 0) verti = 1;
+        //else if (moveVerti < 0) verti = -1;
         if (_cor == false)
         {
             _rb.velocity = new Vector2(moveHorizon * _speed, moveVerti * _speed);
@@ -41,7 +41,9 @@ public class MovePlayer : MonoBehaviour
             //ƒuƒŠƒ“ƒN‚ÌŽÀ‘•
             if (Input.GetMouseButtonDown(1))//‚¢‚Â‚©GetAxis‚É•Ï‚¦‚é
             {
-                StartCoroutine(BlinkCol(horizon,verti));
+                //StartCoroutine(BlinkCol(horizon,verti));
+                //StartCoroutine(BlinkColMouse(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y));
+                StartCoroutine(BlinkColMouse2());
             }
         }
 
@@ -86,5 +88,25 @@ public class MovePlayer : MonoBehaviour
         yield return new WaitForSeconds(.1f);
         _cor = false;
         yield break;
+    }
+    IEnumerator BlinkColMouse2()
+    {
+        _cor = true;
+        _hp._invincible = true;
+        _rb.velocity =  MouseCorsolAngle(Camera.main.ScreenToWorldPoint(Input.mousePosition))*_blink;//new Vector2(-x*_blink, -y*_blink); //* _blink, y * _blink);
+        yield return new WaitForSeconds(.08f);
+        _cor = false;
+        _hp._invincible = false;
+        yield break;
+    }
+    Vector2 MouseCorsolAngle(Vector3 CorsolPos)
+    {
+        float rad = 0;
+        if (CorsolPos != null)
+        {
+            Vector2 a = transform.position - CorsolPos;
+            rad = Mathf.Atan2(-a.x, -a.y);
+        }
+        return new Vector2(Mathf.Sin(rad), Mathf.Cos(rad)).normalized;
     }
 }

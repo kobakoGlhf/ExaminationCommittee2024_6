@@ -66,7 +66,7 @@ public class SkillShot : MonoBehaviour
         GameObject newObj= Instantiate(_objectQ, _player.position, this.transform.rotation);
         newObj.GetComponent<Skill1>()._playerS=this;
     }
-    Vector2 Crosshair()
+    public Vector2 Crosshair()
     {
         _player = _player.transform;
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

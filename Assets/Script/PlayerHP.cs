@@ -36,12 +36,12 @@ public class PlayerHP : MonoBehaviour
     {
         _movePlayer.GetComponent<MovePlayer>().enabled = false;
         _skillShot.enabled = false;
+        _invincible = true;
         _rb.AddForce(new Vector2(x*_knockBack,y*_knockBack),ForceMode2D.Impulse);
         yield return new WaitForSeconds(.1f);
         
         _movePlayer.GetComponent<MovePlayer>().enabled=true;
         _skillShot.enabled=true;
-        _invincible = true;
         yield return new WaitForSeconds(_invincibleTime);
         _invincible=false;
         yield break;
