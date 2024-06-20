@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         var obj = Instantiate(_bullet, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-        Vector3 pos = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, -Angule());
+        Vector3 pos = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, -PlayerAngle());
         obj.transform.localEulerAngles = pos;
     }
     private void OnTriggerEnter2D(Collider2D collision)
