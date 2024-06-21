@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] Animator _plyaerAnim;
-    [SerializeField] int _animationIndex;
+    public int _animationIndex;
     // Start is called before the first frame update
     void Start()
     {

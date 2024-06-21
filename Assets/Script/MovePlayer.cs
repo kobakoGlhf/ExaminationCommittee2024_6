@@ -11,8 +11,8 @@ public class MovePlayer : MonoBehaviour
     bool _cor;
     [SerializeField] SkillShot _shot;
     [SerializeField] PlayerHP _hp;
-    [SerializeField] Animator _plyaerAnim;
-    int _animationIndex;
+    [SerializeField] PlayerAnimator _plyaerAnim;
+    bool _noFilp;
     //Vector3 _cameraEnd;
     //Vector3 _cameraEndMinus;
     // Start is called before the first frame update
@@ -29,7 +29,10 @@ public class MovePlayer : MonoBehaviour
     {
         float moveHorizon = Input.GetAxis("Horizontal");
         float moveVerti = Input.GetAxis("Vertical");
-        FlipChange(moveHorizon);
+        if (_noFilp == false)
+        {
+            FlipChange(moveHorizon);
+        }
         MoveAnimetion(moveHorizon, moveVerti);
         if (_cor == false)
         {
@@ -40,23 +43,30 @@ public class MovePlayer : MonoBehaviour
                 //StartCoroutine(BlinkCol(horizon,verti));
                 //StartCoroutine(BlinkColMouse(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y));
                 StartCoroutine(BlinkColMouse());
-                _animationIndex = 2;
+                _plyaerAnim._animationIndex = 2;
                 Invoke("AnimationReset", .3f);
             }
         }
         ////à⁄ìÆêßå¿(ç°ÇÕï®óùìIÇ»ï«ÇégópíÜ
         //if(_cameraEnd.x<=transform.position.x||_cameraEnd.y<=transform.position.y||
         //        _cameraEndMinus.x >= transform.position.x || _cameraEndMinus.y >= transform.position.y)
-        _plyaerAnim.SetInteger("PlayerAnimation", _animationIndex);
     }
     IEnumerator BlinkColMouse()
     {
         _cor = true;
         _hp._invincible = true;
-        _rb.velocity = MouseCorsolAngle(Camera.main.ScreenToWorldPoint(Input.mousePosition)) * _blink;//new Vector2(-x*_blink, -y*_blink); //* _blink, y * _blink)
+        Vector2 mousePos = MouseCorsolAngle(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        _rb.velocity = mousePos * _blink;
+        if (mousePos.x <= 0)
+        {
+            _PlayerSpriteRenderer.flipX = true;
+            _noFilp = true;
+        }
         yield return new WaitForSeconds(.08f);
         _cor = false;
         _hp._invincible = false;
+        yield return new WaitForSeconds(.1f);
+        _noFilp = false;
         yield break;
     }
     Vector2 MouseCorsolAngle(Vector3 CorsolPos)
@@ -82,14 +92,14 @@ public class MovePlayer : MonoBehaviour
     }
     void MoveAnimetion(float x, float y)
     {
-        if (Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.S)|| Input.GetKey(KeyCode.W)|| Input.GetKey(KeyCode.D))
+        if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D)) && _plyaerAnim._animationIndex != 2)
         {
-            _animationIndex = 1;
+            _plyaerAnim._animationIndex = 1;
         }
         else AnimationReset();
     }
     void AnimationReset()
     {
-        _animationIndex = 0;
+        _plyaerAnim._animationIndex = 0;
     }
 }

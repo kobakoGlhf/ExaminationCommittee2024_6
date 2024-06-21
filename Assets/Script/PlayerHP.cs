@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngineInternal;
 
 public class PlayerHP : MonoBehaviour
 {
@@ -12,16 +13,15 @@ public class PlayerHP : MonoBehaviour
     [HideInInspector] public bool _invincible;
     [SerializeField] float _invincibleTime = 0.75f;
     public int _hitDamage = 1;
+    PlayerAnimator _animator;
     Rigidbody2D _rb;
     void Start()
     {
         _rb = _movePlayer.GetComponent<Rigidbody2D>();
         _hitPoint = _maxHP;
+        _animator=GetComponent<PlayerAnimator>();
     }
-    private void Update()
-    {
-        if (_hitPoint <= 0) Destroy(_destroyObj);
-    }
+
     public void HealHP(int heal)
     {
         _hitPoint += heal;
@@ -36,7 +36,10 @@ public class PlayerHP : MonoBehaviour
         _skillShot.enabled = false;
         _invincible = true;
         _rb.AddForce(new Vector2(x * _knockBack, y * _knockBack), ForceMode2D.Impulse);
-        yield return new WaitForSeconds(.1f);
+        _animator._animationIndex = 3;
+        yield return new WaitForSeconds(.05f);
+        _animator._animationIndex = 0;
+        yield return new WaitForSeconds(.05f);
         _movePlayer.GetComponent<MovePlayer>().enabled = true;
         _skillShot.enabled = true;
         yield return new WaitForSeconds(_invincibleTime);
@@ -48,6 +51,7 @@ public class PlayerHP : MonoBehaviour
         if (collision.gameObject.tag == "EnemyBullet" && _invincible == false)
         {
             _hitPoint -= _hitDamage;
+            if (_hitPoint <= 0) Destroy(_destroyObj);
             float x;
             float y;
             x = transform.position.x - collision.transform.position.x;

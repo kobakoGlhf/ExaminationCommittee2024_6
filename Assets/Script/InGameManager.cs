@@ -42,7 +42,7 @@ public class InGameManager : MonoBehaviour
             _hpText.text = _playerHp._hitPoint.ToString();
         }
 
-        if (_player != null && _player._hitPoint <= 0) GameOver();
+        if (_player == null) GameOver();
         if(_skillShot._gardActive)
         {
             _gardSkillUI.GetComponent<Image>().color=Color.red;
