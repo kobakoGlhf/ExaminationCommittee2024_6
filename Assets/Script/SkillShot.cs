@@ -37,7 +37,7 @@ public class SkillShot : MonoBehaviour
         }
         if (_gardSkillCoolCount >= _skillPointCount)
         {
-            _gardActive = true;//aaaaaaaaaaaaaaaaaaaa
+            _gardActive = true;
             if (_guardSkill != null && Input.GetKeyDown(KeyCode.E))
             {
                 StartCoroutine(gardSkillCol(_gardSkillTime));
@@ -57,7 +57,7 @@ public class SkillShot : MonoBehaviour
         attack._attack = false;
         _guardSkill.SetActive(false);
         _skillPointCount += _skillPoint;
-        _gardActive = false;//aaaaaaaaaaaaaaaaaa
+        _gardActive = false;
         yield break;
     }
     void SkillShot1()
