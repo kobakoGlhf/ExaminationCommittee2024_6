@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Skill1 : MonoBehaviour
 {
     //[SerializeField] float _lifeTime=2;
-    [SerializeField]public float _speed = 5;
+    [SerializeField] public float _speed = 5;
     Rigidbody2D _rb;
     SkillShot _skillShot;
     [HideInInspector]
@@ -22,7 +20,6 @@ public class Skill1 : MonoBehaviour
     }
     void Mazzle()
     {
-
         _rb.velocity = this.transform.up * -_speed;
         //Destroy(gameObject, _lifeTime);
     }
@@ -30,12 +27,14 @@ public class Skill1 : MonoBehaviour
     {
         if (gameObject.tag != "PlayerBullet")
         {
-            if(collision.tag=="Wall"||collision.tag=="Player")
-            Destroy(gameObject); 
+            if (collision.tag == "Wall" || collision.tag == "Player")
+            {
+                Destroy(gameObject);
+            }
         }
         if (gameObject.tag == "PlayerBullet")
         {
-            if (collision.tag == "Target"||collision.tag=="Boss")
+            if (collision.tag == "Target" || collision.tag == "Boss")
             {
                 Destroy(gameObject);
                 _playerS._gardSkillCoolCount += 1;

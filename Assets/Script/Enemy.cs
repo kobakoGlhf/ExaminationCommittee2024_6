@@ -17,8 +17,14 @@ public class Enemy : MonoBehaviour
     {
         _player = GameObject.Find("PlayerObj");
         _inGameManager = GameObject.Find("InGameManager").GetComponent<InGameManager>();
-        if (_bulletCreatAngleSer == 0) _bulletCreatAngle = 360 / 1;
-        else _bulletCreatAngle =360/_bulletCreatAngleSer;
+        if (_bulletCreatAngleSer == 0)
+        {
+            _bulletCreatAngle = 360 / 1;
+        }
+        else
+        {
+            _bulletCreatAngle = 360 / _bulletCreatAngleSer;
+        }
         Debug.Log(_bulletCreatAngle);
     }
     private void Update()
@@ -29,7 +35,6 @@ public class Enemy : MonoBehaviour
         if(Input.GetKeyUp(KeyCode.Y))
         {
             BulletClone(_bulletCreatCount, false);
-
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -111,7 +116,6 @@ public class Enemy : MonoBehaviour
                     pos.z = PlayerAngle() + i;
                     Debug.Log(pos.z);
                     var obj = Instantiate(_bullet, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-
                     obj.transform.localEulerAngles = pos;
                 }
                 else

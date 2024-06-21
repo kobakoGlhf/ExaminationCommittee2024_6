@@ -16,7 +16,6 @@ public class ButtonScript : MonoBehaviour
             obj.SetActive(false);
         }
         ActiveGameObjectFalse(_panel);
-
     }
     public void SceneChanges()
     {

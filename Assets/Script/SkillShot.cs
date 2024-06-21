@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SkillShot : MonoBehaviour
@@ -8,14 +7,14 @@ public class SkillShot : MonoBehaviour
     [SerializeField] Transform _player;
     [SerializeField] float _skillCoolTime;
     [SerializeField] GameObject _guardSkill;
-    [SerializeField] float _gardSkillTime=1f;
-    
-    [HideInInspector]public int _gardSkillCoolCount;
+    [SerializeField] float _gardSkillTime = 1f;
+
+    [HideInInspector] public int _gardSkillCoolCount;
     [SerializeField] int _skillPoint = 1;
     int _skillPointCount;
-    [HideInInspector]public bool _gardActive;
+    [HideInInspector] public bool _gardActive;
     InGameManager _inGameManager;
-    
+
     public float _mousePosX;
     public float _mousePosY;
     // Start is called before the first frame update
@@ -47,7 +46,7 @@ public class SkillShot : MonoBehaviour
     }
     IEnumerator gardSkillCol(float i)
     {
-        GardSkill attack=_guardSkill.GetComponent<GardSkill>();
+        GardSkill attack = _guardSkill.GetComponent<GardSkill>();
         _guardSkill.SetActive(true);
         attack._attack = true;
         yield return null;
@@ -58,13 +57,13 @@ public class SkillShot : MonoBehaviour
         attack._attack = false;
         _guardSkill.SetActive(false);
         _skillPointCount += _skillPoint;
-        _gardActive=false;//aaaaaaaaaaaaaaaaaa
+        _gardActive = false;//aaaaaaaaaaaaaaaaaa
         yield break;
     }
     void SkillShot1()
     {
-        GameObject newObj= Instantiate(_objectQ, _player.position, this.transform.rotation);
-        newObj.GetComponent<Skill1>()._playerS=this;
+        GameObject newObj = Instantiate(_objectQ, _player.position, this.transform.rotation);
+        newObj.GetComponent<Skill1>()._playerS = this;
     }
     public Vector2 Crosshair()
     {

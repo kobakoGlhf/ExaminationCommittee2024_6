@@ -12,18 +12,20 @@ public class InGameManager : MonoBehaviour
     [SerializeField] Text _scoreText;
     [SerializeField] Text _hpText;
     [SerializeField]PlayerHP _playerHp;
+    [SerializeField]Slider _hpSlider;
     [SerializeField]GameObject _gardSkillUI;
     [SerializeField]SkillShot _skillShot;
     [SerializeField] BoxCollider2D _spawnArea;
     [SerializeField] GameObject _spawnObject;
     [SerializeField]GameObject _gameOvarUI;
-
+    GameObject _hpChild;
     int _scoreSub = 0;
-
     // Start is called before the first frame update
     void Start()
     {
+        _hpChild = _hpSlider.transform.GetChild(1).gameObject;
         Cursor.lockState = CursorLockMode.Confined;
+        _hpSlider.value = 1;
     }
 
     // Update is called once per frame
@@ -49,6 +51,11 @@ public class InGameManager : MonoBehaviour
         {
             _gardSkillUI.GetComponent<Image>().color = Color.white;
         }
+        _hpSlider.value=(float)_playerHp._hitPoint/_playerHp._maxHP;
+        if (_hpSlider.value == 0)
+        {
+            _hpChild.SetActive(false);
+        }
     }
     void CreatorArea()
     {
@@ -59,6 +66,6 @@ public class InGameManager : MonoBehaviour
     void GameOver()
     {
         _gameOvarUI.SetActive(true);
+        _hpSlider.gameObject.SetActive(true);
     }
-
 }
