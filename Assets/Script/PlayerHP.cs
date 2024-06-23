@@ -12,6 +12,7 @@ public class PlayerHP : MonoBehaviour
     [SerializeField] float _knockBack = 100;//damageのノックバック100ぐらいがちょうどいい
     [HideInInspector] public bool _invincible;
     [SerializeField] float _invincibleTime = 0.75f;
+    [SerializeField] GameObject _diedEffect;
     public int _hitDamage = 1;
     PlayerAnimator _animator;
     Rigidbody2D _rb;
@@ -51,7 +52,11 @@ public class PlayerHP : MonoBehaviour
         if (collision.gameObject.tag == "EnemyBullet" && _invincible == false)
         {
             _hitPoint -= _hitDamage;
-            if (_hitPoint <= 0) Destroy(_destroyObj);
+            if (_hitPoint <= 0)
+            {
+                Instantiate(_diedEffect, transform.position,Quaternion.identity);
+                Destroy(_destroyObj);
+            }
             float x;
             float y;
             x = transform.position.x - collision.transform.position.x;

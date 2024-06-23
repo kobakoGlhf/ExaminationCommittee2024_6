@@ -1,20 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
-using UnityEngine.Animations;
-using UnityEngine.UIElements;
-using static UnityEditor.PlayerSettings;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] int _bulletCreatAngleSer=30;
+    [SerializeField] int _bulletCreatAngleSer = 30;
     [SerializeField] int _bulletCreatCount;
     int _bulletCreatAngle;
     [SerializeField] GameObject _bullet;
     InGameManager _inGameManager;
     GameObject _player;
+    SpriteRenderer _enemySpriteRenderer;
+    [SerializeField] float _attackCoolTime=3;
+    float _timer;
     private void Start()
     {
+        _enemySpriteRenderer = GetComponent<SpriteRenderer>();
         _player = GameObject.Find("PlayerObj");
         _inGameManager = GameObject.Find("InGameManager").GetComponent<InGameManager>();
         if (_bulletCreatAngleSer == 0)
@@ -28,19 +28,35 @@ public class Enemy : MonoBehaviour
     }
     private void Update()
     {
-        //var obj = Instantiate(_bullet, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-        //Vector3 pos = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, -PlayerAngle());
+        if (_player != null)
+        {
+            var enemyFlipX = _player.gameObject.transform.position.x - transform.position.x > 0;
+            if (enemyFlipX)
+            {
+                _enemySpriteRenderer.flipX = false;
+            }
+            else
+            {
+                _enemySpriteRenderer.flipX = true;
+            }
+        }
         //obj.transform.localEulerAngles = pos;
-        if(Input.GetKeyUp(KeyCode.Y))
+        if (Input.GetKeyUp(KeyCode.Y))
         {
             BulletClone(_bulletCreatCount, false);
+        }
+        _timer+=Time.deltaTime;
+        if (_attackCoolTime < _timer && _player!=null)
+        {
+            BulletClone(3, true);
+            _timer = 0;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag =="PlayerBullet")
+        if (collision.tag == "PlayerBullet")
         {
-            BulletClone(_bulletCreatCount,true);
+            BulletClone(_bulletCreatCount, true);
         }
     }
     private float PlayerAngle()
@@ -48,8 +64,8 @@ public class Enemy : MonoBehaviour
         float dig = 0;
         if (_player != null)
         {
-            Vector2 a = transform.position - _player.gameObject.transform.position;
-            dig = Mathf.Atan2(a.x, a.y) * Mathf.Rad2Deg;
+            Vector2 angle = transform.position - _player.gameObject.transform.position;
+            dig = Mathf.Atan2(angle.x, angle.y) * Mathf.Rad2Deg;
         }
         return -dig;
     }
@@ -57,43 +73,7 @@ public class Enemy : MonoBehaviour
     {
         _inGameManager._score += 1;
     }
-    void BulletClone(int count)
-    {
-        float j = 0;
-        for (float i = 0; i < 360 && count > 0; i += _bulletCreatAngle)
-        {
-            count--;
-            if (j == 0)
-            {
-                Vector3 pos = transform.localEulerAngles;
-                pos.z = PlayerAngle();
-                Debug.Log(pos.z);
-                var obj = Instantiate(_bullet, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-                obj.transform.localEulerAngles = pos;
-            }
-            else if (j % 2 == 0 && j != 0)
-            {
-                Vector3 pos = transform.localEulerAngles;
-                pos.z = PlayerAngle() + i;
-                Debug.Log(pos.z);
-                var obj = Instantiate(_bullet, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-                obj.transform.localEulerAngles = pos;
-            }
-            else
-            {
-
-                Vector3 pos = transform.localEulerAngles;
-                pos.z = PlayerAngle() + -i;
-                Debug.Log(pos.z);
-                var obj = Instantiate(_bullet, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-                obj.transform.localEulerAngles = pos;
-                i -= _bulletCreatAngle;
-            }
-            j++;
-        }
-
-    }
-        void BulletClone(int count, bool playerTarget)
+    void BulletClone(int count, bool playerTarget)
     {
         if (playerTarget)
         {
@@ -128,7 +108,8 @@ public class Enemy : MonoBehaviour
             }
 
         }
-        else {
+        else
+        {
             var harding = _player.transform.position - this.gameObject.transform.position;
             var dis = harding.magnitude;
             var dire = harding / dis;

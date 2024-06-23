@@ -138,6 +138,7 @@ MonoBehaviour:
   _bulletCreatAngleSer: 10
   _bulletCreatCount: 5
   _bullet: {fileID: 195340906934527091, guid: 52dcc506e256cf6409b404256aa8310c, type: 3}
+  _attackCoolTime: 3
 --- !u!95 &3420881536394138027
 Animator:
   serializedVersion: 5

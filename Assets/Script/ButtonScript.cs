@@ -19,21 +19,22 @@ public class ButtonScript : MonoBehaviour
     }
     public void SceneChanges()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        StartCoroutine(ScnenLoader());
     }
     public void SceneChanges(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
-        Invoke("LoadSceneEfect", 1f);
-        ActiveGameObjectTrue(_panel);
-        Image panelColor=_panel.GetComponent<Image>();
-        //SpanelColor.color = new Color(255, 0, 0, 1);
+        StartCoroutine(ScnenLoader(sceneName));
     }
-    public IEnumerator SceneChanges(Scene scene)
+    private IEnumerator ScnenLoader()
     {
-        _sceneName = scene.name;
-        SceneManager.LoadScene(_sceneName);
-        yield return new WaitForSeconds(1) ;
+        yield return new WaitForSeconds(.5f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        yield break;
+    }
+    private IEnumerator ScnenLoader(string sceneName)
+    {
+        yield return new WaitForSeconds(.5f);
+        SceneManager.LoadScene(sceneName);
         yield break;
     }
     public void ActiveGameObjectTrue(GameObject obj)

@@ -4,69 +4,65 @@ using UnityEngine;
 public class MovePlayer : MonoBehaviour
 {
     [SerializeField] float _speed = 5f;
-    [SerializeField] Rigidbody2D _rb;
+    Rigidbody2D _rb;
     public int _killSkillCoolDown;
-    [SerializeField] float _blink = 2;
-    [SerializeField] SpriteRenderer _PlayerSpriteRenderer;
+    [SerializeField] float _blinkRange = 40;
+    [SerializeField] SpriteRenderer _playerSpriteRenderer;
     bool _cor;
     [SerializeField] SkillShot _shot;
     [SerializeField] PlayerHP _hp;
     [SerializeField] PlayerAnimator _plyaerAnim;
-    bool _noFilp;
-    //Vector3 _cameraEnd;
-    //Vector3 _cameraEndMinus;
-    // Start is called before the first frame update
+    [SerializeField] float _skillCoolTimerBring=1f;
+    float _timer;
+    bool _cantFilp;
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        //移動制限用　画面端の取得
-        //_cameraEndMinus=Camera.main.ViewportToWorldPoint(Vector2.zero);
-        //_cameraEnd=Camera.main.ViewportToWorldPoint(Vector2.one);
+        _timer = _skillCoolTimerBring;
     }
-
-    // Update is called once per frame
     void Update()
     {
+        _timer+=Time.deltaTime;
         float moveHorizon = Input.GetAxis("Horizontal");
         float moveVerti = Input.GetAxis("Vertical");
-        if (_noFilp == false)
+        if (_cantFilp == false)
         {
             FlipChange(moveHorizon);
         }
-        MoveAnimetion(moveHorizon, moveVerti);
+        MoveAnimetion();
         if (_cor == false)
         {
             _rb.velocity = new Vector2(moveHorizon * _speed, moveVerti * _speed);
-            //ブリンクの実装
-            if (Input.GetMouseButtonDown(1))//いつかGetAxisに変える
+            if (Input.GetMouseButtonDown(1) && _timer > _skillCoolTimerBring)//いつかGetAxisに変える
             {
-                //StartCoroutine(BlinkCol(horizon,verti));
-                //StartCoroutine(BlinkColMouse(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y));
                 StartCoroutine(BlinkColMouse());
                 _plyaerAnim._animationIndex = 2;
                 Invoke("AnimationReset", .3f);
+                _timer = 0;
             }
         }
-        ////移動制限(今は物理的な壁を使用中
-        //if(_cameraEnd.x<=transform.position.x||_cameraEnd.y<=transform.position.y||
-        //        _cameraEndMinus.x >= transform.position.x || _cameraEndMinus.y >= transform.position.y)
     }
     IEnumerator BlinkColMouse()
     {
         _cor = true;
         _hp._invincible = true;
         Vector2 mousePos = MouseCorsolAngle(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        _rb.velocity = mousePos * _blink;
+        _rb.velocity = mousePos * _blinkRange;
         if (mousePos.x <= 0)
         {
-            _PlayerSpriteRenderer.flipX = true;
-            _noFilp = true;
+            _playerSpriteRenderer.flipX = true;
+            _cantFilp = true;
+        }
+        else
+        {
+            _playerSpriteRenderer.flipX = false;
+            _cantFilp = true;
         }
         yield return new WaitForSeconds(.08f);
         _cor = false;
         _hp._invincible = false;
         yield return new WaitForSeconds(.1f);
-        _noFilp = false;
+        _cantFilp = false;
         yield break;
     }
     Vector2 MouseCorsolAngle(Vector3 CorsolPos)
@@ -83,14 +79,14 @@ public class MovePlayer : MonoBehaviour
     {
         if (0 <= x)
         {
-            _PlayerSpriteRenderer.flipX = false;
+            _playerSpriteRenderer.flipX = false;
         }
         else
         {
-            _PlayerSpriteRenderer.flipX = true;
+            _playerSpriteRenderer.flipX = true;
         }
     }
-    void MoveAnimetion(float x, float y)
+    void MoveAnimetion()//GetAxisだとキーを離しても完全に停止するまでanimationが再生されるためGetKey
     {
         if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D)) && _plyaerAnim._animationIndex != 2)
         {

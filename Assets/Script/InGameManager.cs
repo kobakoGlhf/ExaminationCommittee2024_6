@@ -19,6 +19,7 @@ public class InGameManager : MonoBehaviour
     [SerializeField] GameObject _spawnPrefab;
     [SerializeField] GameObject[] _targetObjects;
     [SerializeField]GameObject _gameOvarUI;
+    [SerializeField] Text _scoreResult;
     GameObject _hpChild;
     // Start is called before the first frame update
     void Start()
@@ -39,10 +40,6 @@ public class InGameManager : MonoBehaviour
             }
         }
         _scoreText.text = _score.ToString();
-        if (_hpText != null)
-        {
-            _hpText.text = _playerHp._hitPoint.ToString();
-        }
 
         if (_player == null) GameOver();
         if(_skillShot._gardActive)
@@ -71,6 +68,8 @@ public class InGameManager : MonoBehaviour
     void GameOver()
     {
         _gameOvarUI.SetActive(true);
-        _hpSlider.gameObject.SetActive(true);
+        _hpSlider.gameObject.SetActive(false);
+        _scoreText.gameObject.SetActive(false);
+        _scoreResult.text="SCORE : "+_score.ToString();
     }
 }
