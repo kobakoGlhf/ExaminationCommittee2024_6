@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
         {
             _bulletCreatAngle = 360 / _bulletCreatAngleSer;
         }
+        Debug.Log(_bulletCreatAngle);
     }
     private void Update()
     {
@@ -105,6 +106,7 @@ public class Enemy : MonoBehaviour
                 {
                     Vector3 pos = transform.localEulerAngles;
                     pos.z = PlayerAngle();
+                    Debug.Log(pos.z);
                     var obj = Instantiate(_bullet, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
                     obj.transform.localEulerAngles = pos;
                 }
@@ -112,6 +114,7 @@ public class Enemy : MonoBehaviour
                 {
                     Vector3 pos = transform.localEulerAngles;
                     pos.z = PlayerAngle() + i;
+                    Debug.Log(pos.z);
                     var obj = Instantiate(_bullet, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
                     obj.transform.localEulerAngles = pos;
                 }
@@ -120,6 +123,7 @@ public class Enemy : MonoBehaviour
 
                     Vector3 pos = transform.localEulerAngles;
                     pos.z = PlayerAngle() + -i;
+                    Debug.Log(pos.z);
                     var obj = Instantiate(_bullet, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
                     obj.transform.localEulerAngles = pos;
                     i -= _bulletCreatAngle;

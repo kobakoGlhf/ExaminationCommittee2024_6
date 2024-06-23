@@ -16,10 +16,10 @@ public class InGameManager : MonoBehaviour
     [SerializeField]GameObject _gardSkillUI;
     [SerializeField]SkillShot _skillShot;
     [SerializeField] BoxCollider2D _spawnArea;
-    [SerializeField] GameObject _spawnPrefab;
-    [SerializeField] GameObject[] _targetObjects;
+    [SerializeField] GameObject _spawnObject;
     [SerializeField]GameObject _gameOvarUI;
     GameObject _hpChild;
+    int _scoreSub = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,12 +31,10 @@ public class InGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for(int i = 0; i < _targetObjects.Length; i++)
+        if (_score > _scoreSub)
         {
-            if (_targetObjects[i] == null)
-            {
-                _targetObjects[i]=CreatorTarget();
-            }
+            CreatorArea();
+            _scoreSub = _score;
         }
         _scoreText.text = _score.ToString();
         if (_hpText != null)
@@ -59,14 +57,11 @@ public class InGameManager : MonoBehaviour
             _hpChild.SetActive(false);
         }
     }
-    GameObject CreatorTarget()
+    void CreatorArea()
     {
         float randomX = Random.Range(-_spawnArea.size.x, _spawnArea.size.x) * .5f;
         float randomY = Random.Range(-_spawnArea.size.y, _spawnArea.size.y) * .5f;
-        Vector2 spawnArea = new Vector2(randomX + _spawnArea.gameObject.transform.position.x, randomY + _spawnArea.gameObject.transform.position.y);
-        GameObject target = Instantiate(_spawnPrefab, spawnArea, Quaternion.identity);
-        target.tag="Target";
-        return target;
+        Instantiate(_spawnObject, new Vector2(randomX + _spawnArea.gameObject.transform.position.x, randomY + _spawnArea.gameObject.transform.position.y), Quaternion.identity).tag="Target";
     }
     void GameOver()
     {

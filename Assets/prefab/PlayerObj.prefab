@@ -52,10 +52,7 @@ MonoBehaviour:
   _rb: {fileID: 3064893843535420212}
   _killSkillCoolDown: 0
   _blink: 40
-  _PlayerSpriteRenderer: {fileID: 1031858580782248960}
   _shot: {fileID: 3652244164543997467}
-  _hp: {fileID: 6967775090211964925}
-  _plyaerAnim: {fileID: 2449056625487031207}
 --- !u!50 &3064893843535420212
 Rigidbody2D:
   serializedVersion: 4
@@ -82,7 +79,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!1 &2749150495517426344
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +154,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.40392157}
   m_FlipX: 0
@@ -244,7 +241,7 @@ Transform:
   m_GameObject: {fileID: 4715222155327039589}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.014, y: -0.3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -290,7 +287,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -351,9 +348,7 @@ MonoBehaviour:
   _skillCoolTime: 0
   _guardSkill: {fileID: 2749150495517426344}
   _gardSkillTime: 1
-  _gardSkillCoolCount: 0
   _skillPoint: 10
-  _gardActive: 0
   _mousePosX: 0
   _mousePosY: 0
 --- !u!1 &8024349926543119503
@@ -368,8 +363,6 @@ GameObject:
   - component: {fileID: 1031858580782248960}
   - component: {fileID: 6967775090211964925}
   - component: {fileID: 3360750709629887846}
-  - component: {fileID: 2449056625487031207}
-  - component: {fileID: 6072521082862361584}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -387,7 +380,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 504114132731385662}
@@ -433,13 +426,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
-  m_Sprite: {fileID: -3318188226485093758, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 1
-  m_Size: {x: 5, y: 5}
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -457,14 +450,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb98159380456df4db2b435bf3ab9a5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitPoint: 5
-  _maxHP: 5
+  _hitPoint: 10
+  _maxHP: 10
   _destroyObj: {fileID: 57118109285259474}
+  _effector: {fileID: 0}
   _movePlayer: {fileID: 57118109285259474}
   _skillShot: {fileID: 3652244164543997467}
   _knockBack: 100
-  _invincible: 0
-  _invincibleTime: 0.75
   _hitDamage: 1
 --- !u!61 &3360750709629887846
 BoxCollider2D:
@@ -501,48 +493,13 @@ BoxCollider2D:
   m_Offset: {x: 0.005714655, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.4, y: 0.5}
-    oldSize: {x: 0.69, y: 0.44}
-    newSize: {x: 5, y: 5}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
-    drawMode: 1
+    drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 0.18851757, y: 0.18851757}
   m_EdgeRadius: 0
---- !u!114 &2449056625487031207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8024349926543119503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3704ac44b4c4b2144b51b99196882bcf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _plyaerAnim: {fileID: 6072521082862361584}
-  _animationIndex: 0
---- !u!95 &6072521082862361584
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8024349926543119503}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 312496b25d842af4a938e96c7d5aaee0, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
