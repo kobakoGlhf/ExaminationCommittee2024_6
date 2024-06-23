@@ -13,8 +13,8 @@ public class SkillShot : MonoBehaviour
     [SerializeField] int _skillPoint = 1;
     int _skillPointCount;
     [HideInInspector] public bool _gardActive;
-    InGameManager _inGameManager;
-
+    [SerializeField]AudioSource _audioSource;
+    [SerializeField]AudioClip _shotAudio;
     public float _mousePosX;
     public float _mousePosY;
     // Start is called before the first frame update
@@ -24,7 +24,6 @@ public class SkillShot : MonoBehaviour
         _guardSkill.SetActive(false);
         _guardSkill.gameObject.tag = "Untagged";
         _skillPointCount = _skillPoint;
-        _inGameManager = GameObject.Find("InGameManager").GetComponent<InGameManager>();
     }
 
     // Update is called once per frame
@@ -34,6 +33,7 @@ public class SkillShot : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             SkillShot1();
+            _audioSource.PlayOneShot(_shotAudio);
         }
         if (_gardSkillCoolCount >= _skillPointCount)
         {
@@ -63,7 +63,7 @@ public class SkillShot : MonoBehaviour
     void SkillShot1()
     {
         GameObject newObj = Instantiate(_objectQ, _player.position, this.transform.rotation);
-        newObj.GetComponent<Skill1>()._playerS = this;
+        newObj.GetComponent<Skill>()._playerS = this;
     }
     public Vector2 Crosshair()
     {

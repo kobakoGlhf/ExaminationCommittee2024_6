@@ -646,7 +646,7 @@ MonoBehaviour:
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 3250ec9c8c8101745911364ab1aa1de9, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: 72215e6569db6f6468eda74254f74172, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -3720,14 +3720,30 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.newSize.y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3652244164543997467, guid: 009bc87b7297266498073205453da1ce, type: 3}
+      propertyPath: _shotAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 61895ebddc1f8024eb3f189b89c85ff3, type: 3}
+    - target: {fileID: 3652244164543997467, guid: 009bc87b7297266498073205453da1ce, type: 3}
+      propertyPath: _audioSource
+      value: 
+      objectReference: {fileID: 2038762817}
     - target: {fileID: 6967775090211964925, guid: 009bc87b7297266498073205453da1ce, type: 3}
       propertyPath: _diedEffect
       value: 
       objectReference: {fileID: 5177416154393058932, guid: c93f081f33ad9a940b006faf0f35b399, type: 3}
     - target: {fileID: 7950618970966236569, guid: 009bc87b7297266498073205453da1ce, type: 3}
+      propertyPath: _blinkAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: bd3765ad472c78c49952ed8a31e66fa3, type: 3}
+    - target: {fileID: 7950618970966236569, guid: 009bc87b7297266498073205453da1ce, type: 3}
       propertyPath: _blinkRange
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 7950618970966236569, guid: 009bc87b7297266498073205453da1ce, type: 3}
+      propertyPath: _audioSource
+      value: 
+      objectReference: {fileID: 2038762817}
     - target: {fileID: 7950618970966236569, guid: 009bc87b7297266498073205453da1ce, type: 3}
       propertyPath: _skillCoolTimerBring
       value: 0.5

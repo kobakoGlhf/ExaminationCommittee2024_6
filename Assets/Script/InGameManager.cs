@@ -39,7 +39,7 @@ public class InGameManager : MonoBehaviour
                 _targetObjects[i]=CreatorTarget();
             }
         }
-        _scoreText.text = _score.ToString();
+        _scoreText.text = "SCORE : " + _score.ToString();
 
         if (_player == null) GameOver();
         if(_skillShot._gardActive)

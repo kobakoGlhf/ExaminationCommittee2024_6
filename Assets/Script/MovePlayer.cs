@@ -15,6 +15,8 @@ public class MovePlayer : MonoBehaviour
     [SerializeField] float _skillCoolTimerBring=1f;
     float _timer;
     bool _cantFilp;
+    [SerializeField] AudioSource _audioSource;
+    [SerializeField]AudioClip _blinkAudio;
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -39,6 +41,10 @@ public class MovePlayer : MonoBehaviour
                 _plyaerAnim._animationIndex = 2;
                 Invoke("AnimationReset", .3f);
                 _timer = 0;
+                if (_blinkAudio != null)
+                {
+                    _audioSource.PlayOneShot(_blinkAudio);
+                }
             }
         }
     }
