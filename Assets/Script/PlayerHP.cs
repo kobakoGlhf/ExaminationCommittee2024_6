@@ -6,13 +6,14 @@ public class PlayerHP : MonoBehaviour
 {
     [HideInInspector] public int _hitPoint;
     [SerializeField] public int _maxHP;
-    [SerializeField] GameObject _destroyObj;
     [SerializeField] GameObject _movePlayer;
     [SerializeField] SkillShot _skillShot;
     [SerializeField] float _knockBack = 100;//damageのノックバック100ぐらいがちょうどいい
     [HideInInspector] public bool _invincible;
     [SerializeField] float _invincibleTime = 0.75f;
     [SerializeField] GameObject _diedEffect;
+    [SerializeField] AudioSource _audioSource;
+    [SerializeField] AudioClip _damageSound;
     public int _hitDamage = 1;
     PlayerAnimator _animator;
     Rigidbody2D _rb;
@@ -23,20 +24,24 @@ public class PlayerHP : MonoBehaviour
         _animator=GetComponent<PlayerAnimator>();
     }
 
-    public void HealHP(int heal)
-    {
-        _hitPoint += heal;
-        if (_hitPoint > _maxHP)
-        {
-            _hitPoint = _maxHP;
-        }
-    }
+    //public void HealHP(int heal)
+    //{
+    //    _hitPoint += heal;
+    //    if (_hitPoint > _maxHP)
+    //    {
+    //        _hitPoint = _maxHP;
+    //    }
+    //}
     IEnumerator Damage(float x, float y)
     {
         _movePlayer.GetComponent<MovePlayer>().enabled = false;
         _skillShot.enabled = false;
         _invincible = true;
         _rb.AddForce(new Vector2(x * _knockBack, y * _knockBack), ForceMode2D.Impulse);
+        if (_hitPoint > 0)
+        {
+            _audioSource.PlayOneShot(_damageSound);
+        }
         _animator._animationIndex = 3;
         yield return new WaitForSeconds(.05f);
         _animator._animationIndex = 0;
@@ -54,8 +59,7 @@ public class PlayerHP : MonoBehaviour
             _hitPoint -= _hitDamage;
             if (_hitPoint <= 0)
             {
-                Instantiate(_diedEffect, transform.position,Quaternion.identity);
-                Destroy(_destroyObj);
+                DiedEffect();
             }
             float x;
             float y;
@@ -63,5 +67,10 @@ public class PlayerHP : MonoBehaviour
             y = transform.position.y - collision.transform.position.y;
             StartCoroutine(Damage(x, y));
         }
+    }
+    public void DiedEffect()
+    {
+        Instantiate(_diedEffect, transform.position, Quaternion.identity);
+        Destroy(_movePlayer);
     }
 }

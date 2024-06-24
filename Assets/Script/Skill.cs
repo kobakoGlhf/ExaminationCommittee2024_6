@@ -8,6 +8,8 @@ public class Skill : MonoBehaviour
     SkillShot _skillShot;
     [HideInInspector]
     public SkillShot _playerS;
+    float _timer;
+    float _destroyTime=5;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +19,14 @@ public class Skill : MonoBehaviour
             _skillShot = GameObject.Find("Skill").GetComponent<SkillShot>();//カーソル位置の取得
         }
         Mazzle();
+    }
+    private void Update()
+    {
+        _timer+=Time.deltaTime;
+        if (_timer > _destroyTime)
+        {
+            Destroy(gameObject);
+        }
     }
     void Mazzle()
     {

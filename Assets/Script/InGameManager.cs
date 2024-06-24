@@ -1,59 +1,64 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InGameManager : MonoBehaviour
 {
-    [SerializeField]PlayerHP _player=default;
+    [SerializeField] PlayerHP _player = default;
 
     [SerializeField] public int _score = 0;
     [SerializeField] Text _scoreText;
-    [SerializeField] Text _hpText;
-    [SerializeField]PlayerHP _playerHp;
-    [SerializeField]Slider _hpSlider;
-    [SerializeField]GameObject _gardSkillUI;
-    [SerializeField]SkillShot _skillShot;
+    [SerializeField] PlayerHP _playerHp;
+    [SerializeField] Slider _hpSlider;
+    [SerializeField] GameObject _gardSkillUI;
+    [SerializeField] SkillShot _skillShot;
     [SerializeField] BoxCollider2D _spawnArea;
     [SerializeField] GameObject _spawnPrefab;
     [SerializeField] GameObject[] _targetObjects;
-    [SerializeField]GameObject _gameOvarUI;
+    [SerializeField] GameObject _gameOvarUI;
     [SerializeField] Text _scoreResult;
-    GameObject _hpChild;
-    // Start is called before the first frame update
+    [SerializeField] Text _timerInGame;
+    [SerializeField] Text _resultTextMethod;
+    [SerializeField] Text _resultMainText;
+    [SerializeField] float _timeLimit=60;
+    float _timer;
+    int _TimeOverPlayerHP;
+    string _gameOverMethod;
     void Start()
     {
-        _hpChild = _hpSlider.transform.GetChild(1).gameObject;
         Cursor.lockState = CursorLockMode.Confined;
         _hpSlider.value = 1;
+        _timer = _timeLimit;
     }
-
-    // Update is called once per frame
     void Update()
     {
-        for(int i = 0; i < _targetObjects.Length; i++)
+        if (_gameOverMethod != "TimeOver")
         {
-            if (_targetObjects[i] == null)
-            {
-                _targetObjects[i]=CreatorTarget();
-            }
+            EnemyReSpown();
         }
         _scoreText.text = "SCORE : " + _score.ToString();
-
-        if (_player == null) GameOver();
-        if(_skillShot._gardActive)
+        if (_player == null)
         {
-            _gardSkillUI.GetComponent<Image>().color=Color.red;
+            GameOver();
         }
-        if(_skillShot._gardActive==false)
+        else if (_timer < 0)
         {
-            _gardSkillUI.GetComponent<Image>().color = Color.white;
+            _gameOverMethod = "TimeOver";
+            _TimeOverPlayerHP = _playerHp._hitPoint;
+            GameOver();
+            foreach(var obj in _targetObjects)
+            {
+                Destroy(obj);
+            }
         }
-        _hpSlider.value=(float)_playerHp._hitPoint/_playerHp._maxHP;
-        if (_hpSlider.value == 0)
+        else
         {
-            _hpChild.SetActive(false);
+            _timer -= Time.deltaTime;
+            _timerInGame.text = _timer.ToString("N");
+            _hpSlider.value = (float)_playerHp._hitPoint / _playerHp._maxHP;
+        }
+        if ((_score>30 ||_timer < 10) && _targetObjects[0]!=null)
+        {
+            _targetObjects[0].GetComponent<Enemy>()._beam=true;
         }
     }
     GameObject CreatorTarget()
@@ -62,7 +67,7 @@ public class InGameManager : MonoBehaviour
         float randomY = Random.Range(-_spawnArea.size.y, _spawnArea.size.y) * .5f;
         Vector2 spawnArea = new Vector2(randomX + _spawnArea.gameObject.transform.position.x, randomY + _spawnArea.gameObject.transform.position.y);
         GameObject target = Instantiate(_spawnPrefab, spawnArea, Quaternion.identity);
-        target.tag="Target";
+        target.tag = "Target";
         return target;
     }
     void GameOver()
@@ -70,6 +75,28 @@ public class InGameManager : MonoBehaviour
         _gameOvarUI.SetActive(true);
         _hpSlider.gameObject.SetActive(false);
         _scoreText.gameObject.SetActive(false);
-        _scoreResult.text="SCORE : "+_score.ToString();
+        _timerInGame.gameObject.SetActive(false);
+        _scoreResult.text = "SCORE : " + _score.ToString();
+        if (_gameOverMethod == "TimeOver")
+        {
+            _resultTextMethod.text = "LIFE : " + _TimeOverPlayerHP.ToString();
+            _resultMainText.text = "you survived";
+        }
+        else
+        {
+            _resultTextMethod.text = "TIME : "+_timer.ToString("N");
+        }
+    }
+    void EnemyReSpown()
+    {
+        for (int i = 0; i < _targetObjects.Length; i++)
+        {
+            if (_targetObjects[i] == null)
+            {
+                _targetObjects[i] = CreatorTarget();
+                _score += 1;
+                _timer += 0.5f;
+            }
+        }
     }
 }

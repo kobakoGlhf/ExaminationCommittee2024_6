@@ -6,7 +6,6 @@ public class DiedSound : MonoBehaviour
 {
     [SerializeField]AudioSource _AudioSource;
     [SerializeField]AudioClip _sound;
-    // Start is called before the first frame update
     void Start()
     {
         Invoke("SoundPlay", .1f);
