@@ -1,28 +1,38 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    int _bulletCreatAngleSer = 30;
+    [SerializeField] public int _bulletCreatAngleSer = 30;
     int _bulletCreatCount;
-    int _bulletCreatAngle;
+    [SerializeField] int _bulletCreatAngle;
     [SerializeField] GameObject _bullet;
     InGameManager _inGameManager;
     GameObject _player;
     SpriteRenderer _enemySpriteRenderer;
-    float _attackCoolTime = 1.8f;
+    float _attackCoolTime = 2f;
     float _timer;
+    bool _bossEnemy = false;
     public bool _beam;
     AudioSource _audioSource;
     [SerializeField] AudioClip _shotAudio;
     [SerializeField] AudioClip _diedAudio;
     private void Start()
     {
+        if (GetComponent<BossEnemy>() != null)
+        {
+            _bossEnemy = true;
+        }
+        else _bossEnemy=false;
         _enemySpriteRenderer = GetComponent<SpriteRenderer>();
         _player = GameObject.Find("PlayerObj");
         _inGameManager = GameObject.Find("InGameManager").GetComponent<InGameManager>();
         _audioSource = _inGameManager.GetComponent<AudioSource>();
-        _bulletCreatAngleSer = Random.Range(2, 5);
-        _bulletCreatAngleSer *= 10;
+        if (_bossEnemy == false)
+        {
+            _bulletCreatAngleSer = Random.Range(2, 5);
+            _bulletCreatAngleSer *= 10;
+        }
         if (_bulletCreatAngleSer == 0)
         {
             _bulletCreatAngle = 360 / 1;
@@ -31,21 +41,14 @@ public class Enemy : MonoBehaviour
         {
             _bulletCreatAngle = 360 / _bulletCreatAngleSer;
         }
+        if (_bossEnemy == true)
+        {
+            this.gameObject.GetComponent<Enemy>().enabled = false;
+        }
     }
     private void Update()
     {
-        if (_player != null)
-        {
-            var enemyFlipX = _player.gameObject.transform.position.x - transform.position.x > 0;
-            if (enemyFlipX)
-            {
-                _enemySpriteRenderer.flipX = false;
-            }
-            else
-            {
-                _enemySpriteRenderer.flipX = true;
-            }
-        }
+        PlayerFlip();
         _timer += Time.deltaTime;
         if (_attackCoolTime < _timer && _player != null)
         {
@@ -61,10 +64,10 @@ public class Enemy : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "PlayerBullet")
+        if (collision.tag == "PlayerBullet" && _bossEnemy==false)
         {
             _audioSource.PlayOneShot(_diedAudio);
-            _bulletCreatCount=Random.Range(3,10);
+            _bulletCreatCount = Random.Range(3, 10);
             BulletClone(_bulletCreatCount);
         }
     }
@@ -78,7 +81,7 @@ public class Enemy : MonoBehaviour
         }
         return -dig;
     }
-    void BulletClone(int count)
+    public void BulletClone(int count)
     {
         float j = 0;
         for (float i = 0; i < 360 && count > 0; i += _bulletCreatAngle)
@@ -110,6 +113,20 @@ public class Enemy : MonoBehaviour
             j++;
         }
     }
-
-    //OnDestroyでInstantiateするとバグる(おそらく終了時にデストロイされるため判定が残る)
+    public void PlayerFlip()
+    {
+        if (_player != null)
+        {
+            var enemyFlipX = _player.gameObject.transform.position.x - transform.position.x > 0;
+            if (enemyFlipX)
+            {
+                _enemySpriteRenderer.flipX = false;
+            }
+            else
+            {
+                _enemySpriteRenderer.flipX = true;
+            }
+        }
+        //OnDestroyでInstantiateするとバグる(おそらく終了時にデストロイされるため判定がゲーム終了後に実行され、ゴミが残るから)
+    }
 }

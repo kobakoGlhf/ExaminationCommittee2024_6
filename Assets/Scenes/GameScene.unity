@@ -184,9 +184,21 @@ PrefabInstance:
       propertyPath: _bulletCreatAngleSer
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 718683844230227390, guid: 08ebc7dee57062448921b960ad355c89, type: 3}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 718683844230227390, guid: 08ebc7dee57062448921b960ad355c89, type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4966971595507821978, guid: 08ebc7dee57062448921b960ad355c89, type: 3}
       propertyPath: m_Name
-      value: Circle (2)
+      value: Enemy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966971595507821978, guid: 08ebc7dee57062448921b960ad355c89, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7808347705900568083, guid: 08ebc7dee57062448921b960ad355c89, type: 3}
       propertyPath: m_LocalPosition.x
@@ -789,7 +801,7 @@ Transform:
   m_GameObject: {fileID: 420983547}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.8235, y: -2.1205, z: 0.2936884}
+  m_LocalPosition: {x: -15.16, y: -2.1205, z: 0.2936884}
   m_LocalScale: {x: 9.971221, y: 20.163433, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1128,6 +1140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Text: {fileID: 1231770165}
+  A: 
 --- !u!1 &567476254
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,9 +1224,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 718683844230227390, guid: 08ebc7dee57062448921b960ad355c89, type: 3}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 718683844230227390, guid: 08ebc7dee57062448921b960ad355c89, type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4966971595507821978, guid: 08ebc7dee57062448921b960ad355c89, type: 3}
       propertyPath: m_Name
-      value: Circle (1)
+      value: Enemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966971595507821978, guid: 08ebc7dee57062448921b960ad355c89, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6798074300617433859, guid: 08ebc7dee57062448921b960ad355c89, type: 3}
       propertyPath: m_audioClip
@@ -1500,7 +1525,7 @@ Transform:
   m_GameObject: {fileID: 774945513}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.6776, y: -2.2222, z: 0.2936884}
+  m_LocalPosition: {x: 9.75, y: -2.2222, z: 0.2936884}
   m_LocalScale: {x: 9.259525, y: 22.069696, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1876,7 +1901,7 @@ GameObject:
   - component: {fileID: 901237251}
   - component: {fileID: 901237253}
   m_Layer: 5
-  m_Name: GmaeOverMainText
+  m_Name: GameOverMainText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2033,7 +2058,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -8}
+  m_AnchoredPosition: {x: 0, y: -42}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &967196396
@@ -2568,7 +2593,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 5a3599e32dca4ff4d82bf4a0b5e0ab54, type: 3}
     m_FontSize: 34
     m_FontStyle: 0
     m_BestFit: 0
@@ -2624,8 +2649,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 226, y: 160}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 242.89679, y: 165.63232}
+  m_SizeDelta: {x: 126.2064, y: 41.2646}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1247266132
 MonoBehaviour:
@@ -3487,15 +3512,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbbc0d1e03c5014aa2a79a569b3c09f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 3399860584722254957}
+  _playerSkill: {fileID: 1578092217}
   _score: 0
   _scoreText: {fileID: 1231770165}
   _playerHp: {fileID: 3399860584722254957}
   _hpSlider: {fileID: 182638890}
-  _gardSkillUI: {fileID: 0}
   _skillShot: {fileID: 1578092217}
   _spawnArea: {fileID: 1727910725}
   _spawnPrefab: {fileID: 4966971595507821978, guid: 08ebc7dee57062448921b960ad355c89, type: 3}
+  _bossEnemy: {fileID: 7188998631580560558, guid: 3dc7c80915a677a45a8b32791f1b9c7d, type: 3}
   _targetObjects:
   - {fileID: 915633440}
   - {fileID: 33279487}
@@ -3504,8 +3529,9 @@ MonoBehaviour:
   _scoreResult: {fileID: 1428685373}
   _timerInGame: {fileID: 1247266132}
   _resultTextMethod: {fileID: 1309707423}
-  _resultMainText: {fileID: 901237251}
-  _timeLimit: 30
+  _resultText: {fileID: 901237251}
+  _timeLimit: 60
+  _bossReSpawn: 0
 --- !u!4 &1887522573
 Transform:
   m_ObjectHideFlags: 0
@@ -3692,7 +3718,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 5a3599e32dca4ff4d82bf4a0b5e0ab54, type: 3}
     m_FontSize: 34
     m_FontStyle: 0
     m_BestFit: 0
@@ -3913,6 +3939,14 @@ PrefabInstance:
       propertyPath: _audioSource
       value: 
       objectReference: {fileID: 2038762817}
+    - target: {fileID: 6967775090211964925, guid: 009bc87b7297266498073205453da1ce, type: 3}
+      propertyPath: _maxHP
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6967775090211964925, guid: 009bc87b7297266498073205453da1ce, type: 3}
+      propertyPath: _knockBack
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 6967775090211964925, guid: 009bc87b7297266498073205453da1ce, type: 3}
       propertyPath: _diedEffect
       value: 
@@ -4287,13 +4321,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -5386021395239163998, guid: 08ebc7dee57062448921b960ad355c89, type: 3}
-      propertyPath: onryou
-      value: 11.09
-      objectReference: {fileID: 0}
     - target: {fileID: 4966971595507821978, guid: 08ebc7dee57062448921b960ad355c89, type: 3}
       propertyPath: m_Name
-      value: Circle
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966971595507821978, guid: 08ebc7dee57062448921b960ad355c89, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7808347705900568083, guid: 08ebc7dee57062448921b960ad355c89, type: 3}
       propertyPath: m_LocalPosition.x

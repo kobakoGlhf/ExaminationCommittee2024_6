@@ -3,40 +3,49 @@ using UnityEngine.UI;
 
 public class InGameManager : MonoBehaviour
 {
-    [SerializeField] PlayerHP _player = default;
+    [SerializeField] SkillShot _playerSkill = default;
 
     [SerializeField] public int _score = 0;
     [SerializeField] Text _scoreText;
     [SerializeField] PlayerHP _playerHp;
     [SerializeField] Slider _hpSlider;
-    [SerializeField] GameObject _gardSkillUI;
+    GameObject _gardSkillUI;
     [SerializeField] SkillShot _skillShot;
     [SerializeField] BoxCollider2D _spawnArea;
     [SerializeField] GameObject _spawnPrefab;
+    [SerializeField] GameObject _bossEnemy;
     [SerializeField] GameObject[] _targetObjects;
     [SerializeField] GameObject _gameOvarUI;
     [SerializeField] Text _scoreResult;
     [SerializeField] Text _timerInGame;
     [SerializeField] Text _resultTextMethod;
-    [SerializeField] Text _resultMainText;
+    [SerializeField] Text _resultText;
     [SerializeField] float _timeLimit=60;
     float _timer;
     int _TimeOverPlayerHP;
     string _gameOverMethod;
+    [HideInInspector]public bool _bossReSpawn;
+    float _bossReSpawnTimer;
+    GameObject _bossClone;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
         _hpSlider.value = 1;
         _timer = _timeLimit;
+        _bossReSpawn=true;
     }
     void Update()
     {
+        if (_score < 0)
+        {
+            _score = 0;
+        }
         if (_gameOverMethod != "TimeOver")
         {
             EnemyReSpown();
         }
         _scoreText.text = "SCORE : " + _score.ToString();
-        if (_player == null)
+        if (_playerSkill == null)
         {
             GameOver();
         }
@@ -44,10 +53,15 @@ public class InGameManager : MonoBehaviour
         {
             _gameOverMethod = "TimeOver";
             _TimeOverPlayerHP = _playerHp._hitPoint;
+            Destroy(_bossClone);
             GameOver();
             foreach(var obj in _targetObjects)
             {
                 Destroy(obj);
+            }
+            if (_playerSkill != null)
+            {
+                _playerSkill.GetComponent<SkillShot>().enabled = false;
             }
         }
         else
@@ -56,9 +70,15 @@ public class InGameManager : MonoBehaviour
             _timerInGame.text = _timer.ToString("N");
             _hpSlider.value = (float)_playerHp._hitPoint / _playerHp._maxHP;
         }
-        if ((_score>30 ||_timer < 10) && _targetObjects[0]!=null)
+        CreatBoss();
+        if (_bossReSpawn == false)
         {
-            _targetObjects[0].GetComponent<Enemy>()._beam=true;
+            _bossReSpawnTimer += Time.deltaTime;
+            if (_bossReSpawnTimer > 5)
+            {
+                _bossReSpawn = true;
+                _bossReSpawnTimer = 0;
+            }
         }
     }
     GameObject CreatorTarget()
@@ -80,12 +100,13 @@ public class InGameManager : MonoBehaviour
         if (_gameOverMethod == "TimeOver")
         {
             _resultTextMethod.text = "LIFE : " + _TimeOverPlayerHP.ToString();
-            _resultMainText.text = "you survived";
+            _resultText.text = "you survived";
         }
         else
         {
             _resultTextMethod.text = "TIME : "+_timer.ToString("N");
         }
+        CreatBoss();
     }
     void EnemyReSpown()
     {
@@ -95,8 +116,14 @@ public class InGameManager : MonoBehaviour
             {
                 _targetObjects[i] = CreatorTarget();
                 _score += 1;
-                _timer += 0.5f;
             }
+        }
+    }
+    void CreatBoss()
+    {
+        if ((_score > 30 || _timer < _timeLimit/2) && _bossClone == null &&_bossReSpawn==true && _gameOverMethod != "TimeOver")
+        {
+            _bossClone = Instantiate(_bossEnemy);
         }
     }
 }
