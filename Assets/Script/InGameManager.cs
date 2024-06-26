@@ -27,12 +27,17 @@ public class InGameManager : MonoBehaviour
     [HideInInspector]public bool _bossReSpawn;
     float _bossReSpawnTimer;
     GameObject _bossClone;
+    ScoreManager _scoreManager;
+    public int _scoreCountResult;
+    bool _gameOver;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
         _hpSlider.value = 1;
         _timer = _timeLimit;
         _bossReSpawn=true;
+        _scoreManager=GetComponent<ScoreManager>();
+        _gameOver=false;
     }
     void Update()
     {
@@ -45,12 +50,14 @@ public class InGameManager : MonoBehaviour
             EnemyReSpown();
         }
         _scoreText.text = "SCORE : " + _score.ToString();
-        if (_playerSkill == null)
+        if (_playerSkill == null&&_gameOver==false)
         {
             GameOver();
+            _gameOver=true;
         }
-        else if (_timer < 0)
+        else if (_timer < 0&&_gameOver==false)
         {
+            _gameOver=true;
             _gameOverMethod = "TimeOver";
             _TimeOverPlayerHP = _playerHp._hitPoint;
             Destroy(_bossClone);
@@ -96,7 +103,8 @@ public class InGameManager : MonoBehaviour
         _hpSlider.gameObject.SetActive(false);
         _scoreText.gameObject.SetActive(false);
         _timerInGame.gameObject.SetActive(false);
-        _scoreResult.text = "SCORE : " + _score.ToString();
+        _scoreCountResult = _score;
+        _scoreResult.text = "SCORE : " + _scoreCountResult.ToString();
         if (_gameOverMethod == "TimeOver")
         {
             _resultTextMethod.text = "LIFE : " + _TimeOverPlayerHP.ToString();

@@ -9,6 +9,7 @@ public class ButtonScript : MonoBehaviour
     [SerializeField] string _sceneName;
     [SerializeField] GameObject[] _setFalse;
     [SerializeField] GameObject _panel;
+    [SerializeField] ScoreManager _scoreManager;
     private void Start()
     {
         foreach (GameObject obj in _setFalse)
@@ -44,5 +45,9 @@ public class ButtonScript : MonoBehaviour
     public void ActiveGameObjectFalse(GameObject obj)
     {
         obj.SetActive(false);
+    }
+    public void EneableCom(ScoreManager scoreManager)
+    {
+        scoreManager.enabled = true;
     }
 }
