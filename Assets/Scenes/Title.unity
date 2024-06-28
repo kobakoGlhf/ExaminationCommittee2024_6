@@ -1571,7 +1571,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1022669426
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2675,7 +2675,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1496921844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2963,7 +2963,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Dodge Shooter
+  m_Text: "\u30C9\u30C3\u30B8\u30B7\u30E5\u30FC\u30BF\u30FC"
 --- !u!222 &1856365363
 CanvasRenderer:
   m_ObjectHideFlags: 0
