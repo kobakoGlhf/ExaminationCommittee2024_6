@@ -8,7 +8,7 @@ https://www.dafontfree.io/kilowatt-font-free/
 https://fontgraphic.jp/download/fgmediumoldhankaku/
 キャラクター
 https://assetstore.unity.com/packages/2d/characters/warrior-free-asset-195707
-https://assetstore.unity.com/publishers/34852
+[https://assetstore.unity.com/publishers/34852](https://assetstore.unity.com/packages/2d/characters/monsters-creatures-fantasy-167949)
 背景
 https://assetstore.unity.com/packages/2d/environments/pixel-art-top-down-basic-187605
 UI
