@@ -103,16 +103,18 @@ public class InGameManager : MonoBehaviour
         _hpSlider.gameObject.SetActive(false);
         _scoreText.gameObject.SetActive(false);
         _timerInGame.gameObject.SetActive(false);
-        _scoreCountResult = _score;
-        _scoreResult.text = "SCORE : " + _scoreCountResult.ToString();
         if (_gameOverMethod == "TimeOver")
         {
             _resultTextMethod.text = "LIFE : " + _TimeOverPlayerHP.ToString();
             _resultText.text = "you survived";
+            _scoreCountResult = _score+_TimeOverPlayerHP*8;
+            _scoreResult.text = "SCORE : " + _scoreCountResult.ToString();
         }
         else
         {
             _resultTextMethod.text = "TIME : "+_timer.ToString("N");
+            _scoreCountResult = _score;
+            _scoreResult.text = "SCORE : " + _scoreCountResult.ToString();
         }
         CreatBoss();
     }

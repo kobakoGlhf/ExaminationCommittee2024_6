@@ -37,7 +37,7 @@ public class MovePlayer : MonoBehaviour
             _rb.velocity = new Vector2(moveHorizon * _speed, moveVerti * _speed);
             if (Input.GetMouseButtonDown(1) && _timer > _skillCoolTimerBring)//‚¢‚Â‚©GetAxis‚É•Ï‚¦‚é
             {
-                StartCoroutine(BlinkColMouse());
+                StartCoroutine(BlinkCoroutineMousePos());
                 _plyaerAnim._animationIndex = 2;
                 Invoke("AnimationReset", .3f);
                 _timer = 0;
@@ -48,7 +48,7 @@ public class MovePlayer : MonoBehaviour
             }
         }
     }
-    IEnumerator BlinkColMouse()
+    IEnumerator BlinkCoroutineMousePos()
     {
         _cor = true;
         _hp._invincible = true;

@@ -17,6 +17,8 @@ public class SkillShot : MonoBehaviour
     [SerializeField]AudioClip _shotAudio;
     public float _mousePosX;
     public float _mousePosY;
+    float _timer;
+    float _cooltime=0.3f;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,24 +26,27 @@ public class SkillShot : MonoBehaviour
         _guardSkill.SetActive(false);
         _guardSkill.gameObject.tag = "Untagged";
         _skillPointCount = _skillPoint;
+        _timer=_cooltime;
     }
 
     // Update is called once per frame
     void Update()
     {
         Crosshair();
-        if (Input.GetMouseButtonDown(0))
+        _timer += Time.deltaTime;
+        if (Input.GetMouseButtonDown(0)&&_cooltime<_timer)
         {
             SkillShot1();
             _audioSource.PlayOneShot(_shotAudio);
+            _timer = 0;
         }
         if (_gardSkillCoolCount >= _skillPointCount)
         {
             _gardActive = true;
-            if (_guardSkill != null && Input.GetKeyDown(KeyCode.E))
-            {
-                StartCoroutine(gardSkillCol(_gardSkillTime));
-            }
+            //if (_guardSkill != null && Input.GetKeyDown(KeyCode.E))
+            //{
+            //    StartCoroutine(gardSkillCol(_gardSkillTime));
+            //}
         }
     }
     IEnumerator gardSkillCol(float i)

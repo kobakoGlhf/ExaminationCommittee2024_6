@@ -18,11 +18,11 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (_highScore < _gameManager._scoreCountResult&&_playerHP._hitPoint>0)
+        if (_highScore < _gameManager._scoreCountResult)
         {
             _highScore= _gameManager._scoreCountResult;
             _playerHitPoint=_playerHP._hitPoint;
         }
-        _text.text= "HighScore : " + _highScore+"  HP : "+_playerHitPoint;
+        _text.text= "HighScore : " + _highScore+"  LIFE : "+_playerHitPoint;
     }
 }

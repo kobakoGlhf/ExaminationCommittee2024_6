@@ -479,85 +479,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 481256992}
   m_CullTransparentMesh: 1
---- !u!1 &556239473
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 556239474}
-  - component: {fileID: 556239476}
-  - component: {fileID: 556239475}
-  m_Layer: 5
-  m_Name: Text (Legacy) (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &556239474
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 556239473}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 657637890}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00050354004, y: -125.6729}
-  m_SizeDelta: {x: 476.18, y: 38.3695}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &556239475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 556239473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 5a3599e32dca4ff4d82bf4a0b5e0ab54, type: 3}
-    m_FontSize: 24
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 40
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: "\u6CE8\u610F\uFF1A\u6B7B\u3093\u3067\u3057\u307E\u3046\u30CF\u30A4\u30B9\u30B3\u30A2\u306B\u52A0\u7B97\u3055\u308C\u307E\u305B\u3093"
---- !u!222 &556239476
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 556239473}
-  m_CullTransparentMesh: 1
 --- !u!1 &654815275
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,7 +668,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 925689018}
-  - {fileID: 556239474}
   m_Father: {fileID: 1496921846}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1489,7 +1409,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30FB\u30C0\u30C3\u30B7\u30E5\u4E2D\u306F\u7121\u6575\u203C\n\u30FB30\u79D2\u5F8C\u306B\u51FA\u3066\u304F\u308B\u6575\u306F\u5F37\u3044\u304C\n\u3000\u3082\u3089\u3048\u308B\u30B9\u30B3\u30A2\u3082\u591A\u3044\u203C\n\u30FBHP\u306F15!!\u3000\u3067\u3082\u5F53\u305F\u308B\u3068\u30B9\u30B3\u30A2\u304C\u6E1B\u308B\u306E\u3067\u6CE8\u610F!!"
+  m_Text: "\u30FB\u30C0\u30C3\u30B7\u30E5\u4E2D\u306F\u7121\u6575\u203C\n\u30FB\u30C7\u30AB\u30B3\u30A6\u30E2\u30EA\u306F\u786C\u3044\u304C\u3082\u3089\u3048\u308B\n\u3000\u30B9\u30B3\u30A2\u3082\u591A\u3044\uFF01\uFF01\n\u30FB\u30D3\u30FC\u30E0\u306F\u30D6\u30EA\u30F3\u30AF\u3067\u3088\u3051\u308D\uFF01\uFF01\n\u30FBHP\u306F13!!\u3000\n\u30FB\u751F\u304D\u6B8B\u308B\u3068hp\xD78\u30DD\u30A4\u30F3\u30C8!!"
 --- !u!222 &925689020
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2755,7 +2675,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1496921844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2887,7 +2807,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\u623B\u308B"
+  m_Text: "\u6B21\u3078"
 --- !u!222 &1613704059
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3495,7 +3415,7 @@ GameObject:
   - component: {fileID: 1948461145}
   - component: {fileID: 1948461144}
   m_Layer: 5
-  m_Name: Return (1)
+  m_Name: next
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
